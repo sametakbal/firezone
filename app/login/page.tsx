@@ -31,11 +31,10 @@ export default function LoginPage() {
             <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl">
                 <div className="flex justify-center mb-6">
                     <Image
-                        src="/logo.png"
+                        src="/full-logo.png"
                         alt="Logo"
-                        width={64}
-                        height={64}
-                        className="w-auto h-16"
+                        width={256}
+                        height={256}
                     />
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4">

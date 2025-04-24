@@ -31,19 +31,18 @@ export default function RegisterPage() {
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
             <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl">
                 <div className="flex justify-center mb-6">
-
                     <Image
-                        src="/logo.png"
+                        src="/full-logo.png"
                         alt="Logo"
-                        width={64}
-                        height={64}
-                        className="w-auto h-16"
+                        width={256}
+                        height={256}
                     />
                 </div>
                 <form onSubmit={handleRegister} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                         <input
+                            id="email"
                             type="email"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
