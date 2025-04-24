@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -29,7 +30,13 @@ export default function LoginPage() {
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
             <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl">
                 <div className="flex justify-center mb-6">
-                    <img src="/logo.png" alt="Logo" className="h-48 w-auto" />
+                    <Image
+                        src="/logo.png"
+                        alt="Logo"
+                        width={64}
+                        height={64}
+                        className="w-auto h-16"
+                    />
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>

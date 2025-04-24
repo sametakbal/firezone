@@ -3,6 +3,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 
+interface Credentials {
+    email: string;
+    password: string;
+}
+
 const handler = NextAuth({
     providers: [
         CredentialsProvider({
@@ -11,12 +16,12 @@ const handler = NextAuth({
                 email: { label: "Email", type: "text" },
                 password: { label: "Password", type: "password" },
             },
-            async authorize(credentials: any) {
+            async authorize(credentials: Credentials | undefined) {
                 try {
                     const userCredential = await signInWithEmailAndPassword(
                         auth,
-                        credentials.email,
-                        credentials.password
+                        credentials?.email ?? "",
+                        credentials?.password ?? ""
                     );
                     const user = userCredential.user;
                     return { id: user.uid, email: user.email };
