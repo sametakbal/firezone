@@ -36,7 +36,7 @@ export default function RightSidebar() {
                                 <p className="text-gray-500 text-xs">{(i + 1) * 10}K posts</p>
                             </div>
                         ))}
-                        <div className={`px-4 py-3 text-blue-500 ${darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-200'} cursor-pointer rounded-b-2xl`}>
+                        <div className={`px-4 py-3 text-orange-500 ${darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-200'} cursor-pointer rounded-b-2xl`}>
                             Show more
                         </div>
                     </div>
@@ -58,7 +58,7 @@ export default function RightSidebar() {
                                 </button>
                             </div>
                         ))}
-                        <div className={`px-4 py-3 text-blue-500 ${darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-200'} cursor-pointer rounded-b-2xl`}>
+                        <div className={`px-4 py-3 text-orange-500 ${darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-200'} cursor-pointer rounded-b-2xl`}>
                             Show more
                         </div>
                     </div>

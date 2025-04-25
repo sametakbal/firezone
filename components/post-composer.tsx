@@ -35,12 +35,12 @@ export default function PostComposer({ onSubmit }: PostComposerProps) {
                             rows={3}
                         ></textarea>
                         <div className="flex justify-between items-center">
-                            <div className="flex text-blue-500 space-x-2">
+                            <div className="flex text-orange-500 space-x-2">
                                 {/* Post attachments icons would go here */}
                             </div>
                             <button
                                 type="submit"
-                                className={`bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-2 rounded-full 
+                                className={`bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-full 
                           ${!newPostContent.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 disabled={!newPostContent.trim()}
                             >

@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from 'react';
 import { useTheme } from '@/contexts/theme-provider';
 import {
     Home, Bell, Mail, Bookmark, User, Search,
-    MoreHorizontal, Sun, Moon
+    MoreHorizontal, Sun, Moon, LogOut
 } from 'lucide-react';
+import { useSession, signOut } from 'next-auth/react';
 
 interface SidebarProps {
     readonly mobileMenuOpen: boolean;
@@ -19,6 +21,17 @@ interface SidebarItem {
 
 export default function Sidebar({ mobileMenuOpen, closeMobileMenu }: SidebarProps) {
     const { darkMode, toggleDarkMode } = useTheme();
+    const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+    const { data: session } = useSession();
+
+    const toggleLogoutPopup = () => {
+        setShowLogoutPopup(!showLogoutPopup);
+    };
+
+    const handleLogout = () => {
+        signOut({ callbackUrl: '/login' });
+        setShowLogoutPopup(false);
+    };
 
     const sidebarItems: SidebarItem[] = [
         { icon: <Home />, label: 'Anasayfa', onClick: () => { } },
@@ -70,7 +83,7 @@ export default function Sidebar({ mobileMenuOpen, closeMobileMenu }: SidebarProp
             </nav>
 
             {/* Post button */}
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-full w-full mb-3">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-full w-full mb-3">
                 <span className="md:hidden lg:inline">Post</span>
                 <span className="hidden md:inline lg:hidden">+</span>
             </button>
@@ -84,16 +97,37 @@ export default function Sidebar({ mobileMenuOpen, closeMobileMenu }: SidebarProp
             </button>
 
             {/* User profile */}
-            <div className="mt-auto mb-4">
-                <div className={`flex items-center p-3 rounded-full ${darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-200'} cursor-pointer`}>
+            <div className="mt-auto mb-4 relative">
+                <button
+                    className={`flex items-center p-3 rounded-full ${darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-200'} cursor-pointer`}
+                    onClick={toggleLogoutPopup}
+                >
                     <img src="https://steela.ir/en/wp-content/uploads/2022/11/User-Avatar-in-Suit-PNG.png" alt="Profile" className="w-10 h-10 rounded-full mr-3" />
                     <div className="flex-grow md:hidden lg:block">
                         <p className="font-bold">Current User</p>
-                        <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>@currentuser</p>
+                        <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{session?.user?.email}</p>
                     </div>
                     <MoreHorizontal size={20} className="md:hidden lg:block" />
-                </div>
+                </button>
+
+                {/* Logout Popup */}
+                {showLogoutPopup && (
+                    <div
+                        className={`absolute bottom-16 left-0 right-0 mx-4 p-3 rounded-lg shadow-lg 
+                        ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} 
+                        border ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}
+                    >
+                        <button
+                            onClick={handleLogout}
+                            className={`flex items-center w-full p-2 rounded-md 
+                            ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
+                        >
+                            <LogOut size={18} className="mr-2" />
+                            <span>Logout</span>
+                        </button>
+                    </div>
+                )}
             </div>
-        </div >
+        </div>
     );
 }
